@@ -38,7 +38,7 @@ const createTracker = async (req, res) => {
         emptyFields.push('date')
     }
     if (emptyFields.length > 0) {
-        return res.status(400).json({error: 'Please fill in all the fields', emptyFields})
+        return res.status(400).json({error: 'Please check all the fields', emptyFields})
     }
 
     // add document to db collection

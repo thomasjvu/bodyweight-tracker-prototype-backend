@@ -5,6 +5,8 @@ const Schema = mongoose.Schema
 const trackerSchema = new Schema({
     weight: {
         type: Number,
+        min: 0,
+        max: 1000,
         required: true
     },
     date: {
