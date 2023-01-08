@@ -37,6 +37,11 @@ const createTracker = async (req, res) => {
     if (!date) {
         emptyFields.push('date')
     }
+
+    if (weight < 0 || weight > 1000) {
+        return res.status(400).json({error: 'Please make weight between 0 and 1000', emptyFields})
+    }
+
     if (emptyFields.length > 0) {
         return res.status(400).json({error: 'Please check all the fields', emptyFields})
     }
