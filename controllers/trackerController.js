@@ -78,21 +78,12 @@ const deleteTracker = async (req, res) => {
 const updateTracker = async (req, res) => {
     const { id, weight, date } = req.params
 
-    // Check for Empty Fields
-    let emptyFields = []
-    if (!weight) {
-        emptyFields.push('weight')
-    }
-    if (!date) {
-        emptyFields.push('date')
-    }
-
     if (weight < 0 || weight > 1000) {
-        return res.status(400).json({error: 'Please make weight between 0 and 1000', emptyFields})
+        return res.status(400).json({error: 'Please make weight between 0 and 1000'})
     }
 
-    if (emptyFields.length > 0) {
-        return res.status(400).json({error: 'Please check all the fields', emptyFields})
+    if (date == '' || date == null) {
+        return res.status(400).json({error: 'Please check the date field'})
     }
 
     // check if ID is not valid
