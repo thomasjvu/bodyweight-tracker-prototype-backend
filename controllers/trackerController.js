@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 // READ (all) bodyweight tracker
 const getTrackers = async (req, res) => {
-    const trackers = await Tracker.find({}).sort({ createdAt: -1 });
+    const trackers = await Tracker.find({}).sort({ date: -1 });
 
     res.status(200).json(trackers);
 };
