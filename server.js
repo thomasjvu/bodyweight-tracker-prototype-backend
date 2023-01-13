@@ -2,45 +2,44 @@ const express = require('express')
 const mongoose = require('mongoose')
 const trackerRoutes = require('./routes/trackers')
 const cors = require('cors')
-require('dotenv').config()
+const connectDB = require("./config/db");
 
-// Mongoose new release
-mongoose.set('strictQuery', false)
+// Load config
+require('dotenv').config({ path: "./config/.env" });
 
-// express app
+// Express app
 const app = express()
 
-// middleware
+// Middleware
 app.use(cors())
 app.use(express.json())
 
+// Logging
 app.use((req, res, next) => { // see what routes are being used
     console.log(req.path, req.method)
     next()
 })
 
-// routes
+// Routes
 app.use('/api/trackers', trackerRoutes)
-
 app.get('/', (req, res) => {
     res.sendFile(__dirname + "/index.html")
 })
 
-// connect to db
-mongoose.connect(process.env.MONGODB_URI)
-    .then(() => {
-        console.log('Connected to DB')
-        // listen for requests
-        app.listen(process.env.PORT, () => {
-            console.log(`Listening for requests on PORT: ${process.env.PORT}.`)
-            console.log(`Please visit: http://localhost:${process.env.PORT}`)
-        })
-    })
-    .catch((err) => {
-        console.log(err)
-    })
+// Mongoose new release
+mongoose.set('strictQuery', false)
 
-// retrive documents from db
+// Connect to DB
+connectDB()
+
+// Listen for Requests
+app.listen(process.env.PORT, () => {
+    console.log(`Listening for requests on PORT: ${process.env.PORT}.`)
+    console.log(`Please visit: http://localhost:${process.env.PORT}`)
+})
+
+
+// etc, retrive documents from db
 // function getData(callback) {
 //     collection.find({}).toArray((err, docs) => {
 //         callback(docs)
