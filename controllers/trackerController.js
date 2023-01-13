@@ -82,10 +82,6 @@ const updateTracker = async (req, res) => {
         return res.status(400).json({error: 'Please make weight between 0 and 1000'})
     }
 
-    if (date == '' || date == null) {
-        return res.status(400).json({error: 'Please check the date field'})
-    }
-
     // check if ID is not valid
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: 'No such bodyweight tracker' })
