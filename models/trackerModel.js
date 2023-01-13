@@ -11,7 +11,8 @@ const trackerSchema = new Schema({
     },
     date: {
         type: Date,
-        required: true
+        required: true,
+        unique: true
     }
 
 }, { timestamps: true })
