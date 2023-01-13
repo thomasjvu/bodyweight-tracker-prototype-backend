@@ -76,7 +76,7 @@ const deleteTracker = async (req, res) => {
 
 // UPDATE a bodyweight tracker
 const updateTracker = async (req, res) => {
-    const { id } = req.params
+    const { id, weight, date } = req.params
 
     // Check for Empty Fields
     let emptyFields = []
@@ -104,6 +104,7 @@ const updateTracker = async (req, res) => {
         ...req.body
     })
 
+    // check if the tracker exists
     if (!tracker) {
         return res.status(404).json({ error: 'No such bodyweight tracker' })
     }
